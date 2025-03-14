@@ -1,0 +1,28 @@
+/*
+    CSS Personalizado pagina SOBRE
+*/
+
+.fundo {
+    background-color: #0048cec2;
+    height: 220px;
+}
+
+h2,
+h3,
+h4,
+.fundo p {
+    color: #fff;
+}
+
+h2 {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#imgIconeClientes{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    margin-top: -100px;
+    margin-left: -70px;
+}

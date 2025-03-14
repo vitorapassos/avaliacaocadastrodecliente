@@ -31,8 +31,8 @@ function aboutWindow(){
 
     if(mainWindow){
         about = new BrowserWindow({
-            width: 320,
-            height: 300,
+            width: 500,
+            height: 260,
             autoHideMenuBar: true,
             resizable: false,
             minimizable: false,
@@ -104,6 +104,10 @@ const template = [
             },
             {
                 type: 'separator'
+            },
+            {
+                label: 'Recarregar',
+                role: 'reload'
             },
             {
                 label: 'DevTools',
