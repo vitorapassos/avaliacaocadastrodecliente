@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' ">
     <!-- Bootstrap -->
-    <script src="../public/css/bootstrap.min.css"></script>
-    <!-- CSS Personalizado-->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <!-- CSS Personalizado -->
     <link rel="stylesheet" href="../public/css/style.css">
     <link rel="stylesheet" href="../public/css/styleCadastroCliente.css">
     <!--favicon????-->
@@ -14,11 +14,136 @@
     <title>Cadastrar Cliente</title>
 </head>
 <body>
-    <div class="container">
-        <button type="button">Cadastrar</button>
-        <button type="button">Consultar</button>
+   
+    
+    <div class="bg-dark">
+        <div class="container">
+            <h1 id="titulo" class="text-white pt-3">Cadastro de Clientes</h1>
+    
+            <form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="inputNome" class="text-white">Nome *</label>
+                        <input type="text" class="form-control" id="inputNome" required>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="InputRG" class="text-white">RG</label>
+                        <input type="text" class="form-control" id="InputRG">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputCPF" class="text-white">CPF *</label>
+                        <div class="notificaCPF" id="cpfNotificacao">CPF inválido, tente novamente</div>
+                        <input type="text" class="form-control" id="inputCPF" onblur="checarCPF()" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputSexo" class="text-white">Sexo *</label>
+                        <select class="form-control" id="inputSexo" required>
+                            <option value="">Escolha...</option>
+                            <option value="fem">Feminino</option>
+                            <option value="mas">Masculino</option>
+                            <option value="out">Outros</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputDataNasc" class="text-white">Data de Nascimento *</label>
+                        <input type="date" class="form-control" id="inputDataNasc" placeholder="DD/MM/AAAA" required>
+                    </div>
+                </div>
+    
+                <!-- Informações de contato -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="inputTelefone" class="text-white">Telefone</label>
+                        <input type="tel" class="form-control" id="inputTelefone">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputTelefone2" class="text-white">Celular *</label>
+                        <input type="tel" class="form-control" id="inputTelefone2" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputEmail4" class="text-white">Email *</label>
+                        <input type="email" class="form-control" id="inputEmail4" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPassword4" class="text-white">Senha</label>
+                        <input type="password" class="form-control" id="inputPassword4" required>
+                    </div>
+                </div>
+    
+                <!-- Endereço -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="inputCep" class="text-white">CEP *</label>
+                        <input type="text" class="form-control" id="inputCep" placeholder="00000-000" onblur="buscarEndereco()" required>
+                    </div>
+    
+                    <div class="col-md-5">
+                        <label for="InputEndereco" class="text-white">Endereço</label>
+                        <input type="text" class="form-control" id="InputEndereco">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputNum" class="text-white">Número *</label>
+                        <input type="text" class="form-control" id="inputNum" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputComplemento" class="text-white">Complemento</label>
+                        <input type="text" class="form-control" id="inputComplemento">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="inputBairro" class="text-white">Bairro</label>
+                        <input type="text" class="form-control" id="inputBairro" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="inputCidade" class="text-white">Cidade</label>
+                        <input type="text" class="form-control" id="inputCidade" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputEstado" class="text-white">Estado</label>
+                        <select id="inputEstado" class="form-control" required>
+                            <option value="">Escolha...</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="button" class="btn btn-dark" onclick="limpar()">Limpar</button>
+            </form>
+        </div>
     </div>
-
+    
 
     <footer>
         <p id="dataAtual"></p>

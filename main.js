@@ -9,6 +9,8 @@ console.log("Executando processo principal")
 
 const { app, BrowserWindow, nativeTheme, Menu, shell } = require('electron/main')
 
+
+// Criando a janela principal
 let win
 
 const createWindow = () => {
@@ -23,6 +25,9 @@ const createWindow = () => {
     win.loadFile('./src/views/index.html')
 }
 
+
+// Janela Sobre
+let about
 function aboutWindow(){
     nativeTheme.themeSource = 'light'
 
@@ -42,6 +47,26 @@ function aboutWindow(){
     }
 
     about.loadFile('./src/views/sobre.html')
+}
+
+// Janela Cadastro de Cliente
+let cadastroCliente
+function cadastroWindow() {
+
+  const mainWindow = BrowserWindow.getFocusedWindow()
+
+  if (mainWindow) {
+    cadastroCliente = new BrowserWindow({
+      width: 1010,
+      height: 720,
+      autoHideMenuBar: true,
+      resizable: false,
+      minimizable: false,
+      parent: mainWindow,
+      modal: true
+    })
+  }
+  cadastroCliente.loadFile('./src/views/cadastroCliente.html')
 }
 
 // Inicialização
@@ -69,7 +94,8 @@ const template = [
         label: 'Cadastro',
         submenu: [
             {
-                label: 'Cadastrar'
+                label: 'Cadastrar',
+                click: () => cadastroWindow()
             },
             {
                 label: 'Sair',
