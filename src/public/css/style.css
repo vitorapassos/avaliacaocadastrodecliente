@@ -2,16 +2,16 @@
 
 
 
-*{
+* {
     margin: 0px;
 
 }
 
-body{
+body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-footer{
+footer {
     background-color: #0048cef8;
     display: flex;
     position: fixed;
@@ -21,8 +21,8 @@ footer{
     justify-content: space-between;
 }
 
-footer p{
+footer p {
     color: #fff;
     font-size: 1.2em;
-    margin-top: 1   5px;
+    margin-top: 1 5px;
 }
