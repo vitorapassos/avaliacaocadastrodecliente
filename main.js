@@ -15,7 +15,6 @@ const path = require('node:path')
 //  Importação dos métodos conectar e desconectar (módulo de conexão)
 const { conectar, desconectar } = require('./database.js')
 
-
 // Criando a janela principal
 let win
 
@@ -30,9 +29,7 @@ const createWindow = () => {
             preload: path.join(__dirname, 'preload.js')
         }
     })
-
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
-
     win.loadFile('./src/views/index.html')
 }
 
@@ -112,14 +109,14 @@ app.whenReady().then(() => {
     })
 })
 
-// Encerrar a aplicação quando a janela for fechada
+// Se o sistema não for MAC encerrar a aplicação quando a janela for fechada
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit
+        app.quit()
     }
 })
 
-// Desconectar do banco de dados quando a aplicação for finalizada
+// IMPORTANTE!!! Desconectar do banco de dados quando a aplicação for finalizada
 app.on('before-quit', async () => {
     await desconectar()
 })

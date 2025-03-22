@@ -29,16 +29,17 @@
             </div>
 
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="InputRG" class="text-white">RG</label>
                     <input type="text" class="form-control" id="InputRG">
                 </div>
-                <div class="col-md-2">
-                    <label for="inputCPF" class="text-white">CPF *</label>
-                    <div class="notificaCPF" id="cpfNotificacao">CPF inválido, tente novamente</div>
+                <div class="col-md-4">
+                    <label for="inputCPF" class="text-white d-flex">CPF * <a class="notificaCPF" id="cpfNotificacao">CPF
+                            inválido, tente novamente</a></label>
+                    <div class="notificaCPF" id="cpfNotificacao"></div>
                     <input type="text" class="form-control" id="inputCPF" onblur="checarCPF()" required>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label for="inputSexo" class="text-white">Sexo *</label>
                     <select class="form-control" id="inputSexo" required>
                         <option value="">Escolha...</option>
@@ -55,7 +56,7 @@
 
             <!-- Informações de contato -->
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label for="inputTelefone" class="text-white">Telefone</label>
                     <input type="tel" class="form-control" id="inputTelefone">
                 </div>
@@ -63,7 +64,7 @@
                     <label for="inputTelefone2" class="text-white">Celular *</label>
                     <input type="tel" class="form-control" id="inputTelefone2" required>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="inputEmail4" class="text-white">Email *</label>
                     <input type="email" class="form-control" id="inputEmail4" required>
                 </div>
@@ -148,7 +149,8 @@
     <!-- Bootstrap -->
     <script src="../public/js/bootstrap.min.js"></script>
     <!-- Renderização -->
-    <script src="renderer.js"></script>
+    <script src="rendererCadCli.js"></script>
+
 </body>
 
 </html>
