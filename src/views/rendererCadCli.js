@@ -87,3 +87,4 @@ function limpar() {
     document.getElementById('inputCidade').value = ""
     document.getElementById('inputEstado').value = ""
 }
+

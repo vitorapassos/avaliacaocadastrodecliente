@@ -42,3 +42,11 @@ h1 {
    margin-left: auto;
    margin-right: auto;
 }
+
+.separacaoBlocos{
+   border: 1px solid #FFF;
+}
+
+.blocoPesquisar{
+   padding-top: 30px;
+}
