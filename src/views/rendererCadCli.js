@@ -5,6 +5,85 @@
 
 
 
+// Limpar
+function limpar() {
+    document.getElementById('inputNome').value = ""
+    document.getElementById('InputRG').value = ""
+    document.getElementById('inputCPF').value = ""
+    document.getElementById('inputSexo').value = ""
+    document.getElementById('inputDataNasc').value = ""
+    document.getElementById('inputTelefone').value = ""
+    document.getElementById('inputTelefone2').value = ""
+    document.getElementById('inputEmail').value = ""
+    document.getElementById('inputSenha').value = ""
+    document.getElementById('inputCep').value = ""
+    document.getElementById('InputEndereco').value = ""
+    document.getElementById('inputNum').value = ""
+    document.getElementById('inputComplemento').value = ""
+    document.getElementById('inputBairro').value = ""
+    document.getElementById('inputCidade').value = ""
+    document.getElementById('inputEstado').value = ""
+}
+
+
+
+// Capturar foco para primeira caixa de texto
+const foco = document.getElementById('inputNome')
+
+document.addEventListener('DOMContentLoaded', () => {
+    foco.focus()
+})
+
+let frmCli = document.getElementById('frmCli')
+let inputNome = document.getElementById('inputNome')
+let inputRG = document.getElementById('inputRG')
+let inputCPF = document.getElementById('inputCPF')
+let inputSexo = document.getElementById('inputSexo')
+let inputDataNasc = document.getElementById('inputDataNasc')
+let inputTelefone = document.getElementById('inputTelefone')
+let inputTelefone2 = document.getElementById('inputTelefone2')
+let inputEmail = document.getElementById('inputEmail')
+let inputSenha = document.getElementById('inputSenha')
+let inputCep = document.getElementById('inputCep')
+let inputEndereco = document.getElementById('inputEndereco')
+let inputNum = document.getElementById('inputNum')
+let inputComplemento = document.getElementById('inputComplemento')
+let inputBairro = document.getElementById('inputBairro')
+let inputCidade = document.getElementById('inputCidade')
+let inputEstado = document.getElementById('inputEstado')
+
+// ======
+// ==CC==
+
+frmCli.addEventListener('submit', async (event) => {
+    event.preventDefault()
+
+    console.log(inputNome.value,
+        inputRG.value,
+        inputCPF.value,
+        inputSexo.value,
+        inputDataNasc.value,
+        inputTelefone.value,
+        inputTelefone2.value,
+        inputEmail.value,
+        inputSenha.value,
+        inputCep.value,
+        inputEndereco.value,
+        inputNum.value,
+        inputComplemento.value,
+        inputBairro.value,
+        inputCidade.value,
+        inputEstado.value)
+
+        // 
+        const cliente = {
+            
+        }
+})
+
+// ==CC==
+// ======
+
 // Buscas CEP
 function buscarEndereco() {
     let cep = document.getElementById('inputCep').value
@@ -13,7 +92,7 @@ function buscarEndereco() {
     fetch(urlAPI)
         .then(response => response.json())
         .then(dados => {
-            document.getElementById('InputEndereco').value = dados.logradouro
+            document.getElementById('inputEndereco').value = dados.logradouro
             document.getElementById('inputBairro').value = dados.bairro
             document.getElementById('inputCidade').value = dados.localidade
             document.getElementById('inputEstado').value = dados.uf;
@@ -66,25 +145,3 @@ function checarCPF() {
         cpfNotificacao.style.display = "none"; // Esconde o popup
     }
 }
-
-
-// Limpar
-function limpar() {
-    document.getElementById('inputNome').value = ""
-    document.getElementById('InputRG').value = ""
-    document.getElementById('inputCPF').value = ""
-    document.getElementById('inputSexo').value = ""
-    document.getElementById('inputDataNasc').value = ""
-    document.getElementById('inputTelefone').value = ""
-    document.getElementById('inputTelefone2').value = ""
-    document.getElementById('inputEmail4').value = ""
-    document.getElementById('inputPassword4').value = ""
-    document.getElementById('inputCep').value = ""
-    document.getElementById('InputEndereco').value = ""
-    document.getElementById('inputNum').value = ""
-    document.getElementById('inputComplemento').value = ""
-    document.getElementById('inputBairro').value = ""
-    document.getElementById('inputCidade').value = ""
-    document.getElementById('inputEstado').value = ""
-}
-
