@@ -14,7 +14,7 @@ const clientesSchema = new Schema({
     },
     cpf: {
         type: String,
-        unique
+        unique: true
     },
     sexo: {
         type: String

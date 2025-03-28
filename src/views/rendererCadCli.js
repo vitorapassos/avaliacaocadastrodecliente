@@ -3,10 +3,21 @@
  * @author Vitor de Assis
  */
 
+// Capturar foco para primeira caixa de texto
+const foco = document.getElementById('inputBuscar')
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    foco.focus()
+
+    // Desativar botões
+    btnUpdate.disable = true
+    btnDelete.disable = true
+})
 
 
 // Limpar
-function limpar() {
+function resetForm() {
     document.getElementById('inputNome').value = ""
     document.getElementById('InputRG').value = ""
     document.getElementById('inputCPF').value = ""
@@ -24,15 +35,6 @@ function limpar() {
     document.getElementById('inputCidade').value = ""
     document.getElementById('inputEstado').value = ""
 }
-
-
-
-// Capturar foco para primeira caixa de texto
-const foco = document.getElementById('inputNome')
-
-document.addEventListener('DOMContentLoaded', () => {
-    foco.focus()
-})
 
 let frmCli = document.getElementById('frmCli')
 let inputNome = document.getElementById('inputNome')
@@ -75,10 +77,26 @@ frmCli.addEventListener('submit', async (event) => {
         inputCidade.value,
         inputEstado.value)
 
-        // 
-        const cliente = {
-            
-        }
+    // 
+    const cliente = {
+        nomeCli: inputNome.value,
+        cpfCli: inputCPF.value,
+        sexoCli: inputSexo.value,
+        dataNascCli: inputDataNasc.value,
+        telefoneCli: inputTelefone.value,
+        telefone2Cli: inputTelefone2.value,
+        emailCli: inputEmail.value,
+        senhaCli: inputSenha.value,
+        cepCli: inputCep.value,
+        enderecoCli: inputEndereco.value,
+        numCli: inputNum.value,
+        complementoCli: inputComplemento.value,
+        bairroCli: inputBairro.value,
+        cidadeCli: inputCidade.value,
+        estadoCli: inputEstado.value
+    }
+
+    api.createCliente(cliente)
 })
 
 // ==CC==

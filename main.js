@@ -15,6 +15,9 @@ const path = require('node:path')
 //  Importação dos métodos conectar e desconectar (módulo de conexão)
 const { conectar, desconectar } = require('./database.js')
 
+// Model Cliente
+const clienteModel = require('./src/models/Clientes.js')
+
 // Criando a janela principal
 let win
 
@@ -75,7 +78,11 @@ function cadastroWindow() {
             resizable: false,
             minimizable: false,
             parent: mainWindow,
-            modal: true
+            modal: true,
+            // Preload
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
         })
     }
     cadastroCliente.loadFile('./src/views/cadastroCliente.html')
@@ -192,5 +199,16 @@ const template = [
     }
 ]
 
+// ===============================================
+// ================ CRUD CREATE ==================
 
-console.log("Executado com sucesso")
+ipcMain.on('create-cliente', async (event, cliente) =>{
+
+    console.log(cliente)
+
+
+})
+
+
+// ============== FIM CRUD CREATE ================
+// ===============================================

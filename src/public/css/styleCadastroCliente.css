@@ -50,3 +50,15 @@ h1 {
 .blocoPesquisar{
    padding-top: 30px;
 }
+
+
+/* Botão reset */
+
+#btnReset{
+   width: 48px;
+   height: 48px;
+   background-image: url('../img/eraser48.png');
+   border: none;
+   cursor: pointer;
+   margin-left: 10px;
+}
