@@ -77,30 +77,36 @@ frmCli.addEventListener('submit', async (event) => {
         inputCidade.value,
         inputEstado.value)
 
-    // 
-    const cliente = {
-        nomeCli: inputNome.value,
-        cpfCli: inputCPF.value,
-        sexoCli: inputSexo.value,
-        dataNascCli: inputDataNasc.value,
-        telefoneCli: inputTelefone.value,
-        telefone2Cli: inputTelefone2.value,
-        emailCli: inputEmail.value,
-        senhaCli: inputSenha.value,
-        cepCli: inputCep.value,
-        enderecoCli: inputEndereco.value,
-        numCli: inputNum.value,
-        complementoCli: inputComplemento.value,
-        bairroCli: inputBairro.value,
-        cidadeCli: inputCidade.value,
-        estadoCli: inputEstado.value
-    }
 
-    api.createCliente(cliente)
+    try {
+        const cliente = {
+            nomeCli: inputNome.value,
+            rgCli: inputRG.value,
+            cpfCli: inputCPF.value,
+            sexoCli: inputSexo.value,
+            dataNascCli: inputDataNasc.value,
+            telefoneCli: inputTelefone.value,
+            telefone2Cli: inputTelefone2.value,
+            emailCli: inputEmail.value,
+            senhaCli: inputSenha.value,
+            cepCli: inputCep.value,
+            enderecoCli: inputEndereco.value,
+            numCli: inputNum.value,
+            complementoCli: inputComplemento.value,
+            bairroCli: inputBairro.value,
+            cidadeCli: inputCidade.value,
+            estadoCli: inputEstado.value
+        }
+
+        api.createCliente(cliente)
+
+    } catch (error) {
+        console.log(error)
+    }
 })
 
-// ==CC==
-// ======
+// == FIM CC ==
+// ============
 
 // Buscas CEP
 function buscarEndereco() {
@@ -163,3 +169,20 @@ function checarCPF() {
         cpfNotificacao.style.display = "none"; // Esconde o popup
     }
 }
+
+
+// ============================
+// ==== RESETAR FORMULÁRIO ====
+
+function resetForm() {
+    // recarregar a pagina
+    location.reload()
+}
+
+// Uso da api resetForm quando salvar, editar ou excluir um cliente
+api.resetForm((args) => {
+    resetForm()
+})
+
+// ========== FIM =============
+// ==== RESETAR FORMULÁRIO ====

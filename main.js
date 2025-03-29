@@ -7,7 +7,9 @@
 
 console.log("Executando processo principal")
 
-const { app, BrowserWindow, nativeTheme, Menu, shell, ipcMain } = require('electron/main')
+
+// dialog: modulo electron para ativar a caixa de mensagens
+const { app, BrowserWindow, nativeTheme, Menu, shell, ipcMain, dialog } = require('electron/main')
 
 // Ativação do preload.js (importação do path)
 const path = require('node:path')
@@ -202,11 +204,43 @@ const template = [
 // ===============================================
 // ================ CRUD CREATE ==================
 
-ipcMain.on('create-cliente', async (event, cliente) =>{
+ipcMain.on('create-cliente', async (event, cliente) => {
 
     console.log(cliente)
 
+    const novoCliente = clienteModel({
+        nome: cliente.nomeCli,
+        rg: cliente.rgCli,
+        cpf: cliente.cpfCli,
+        sexo: cliente.sexoCli,
+        dataNascimento: cliente.dataNascCli,
+        telefone: cliente.telefoneCli,
+        telefone2: cliente.telefone2Cli,
+        email: cliente.emailCli,
+        senha: cliente.senhaCli,
+        cep: cliente.cepCli,
+        endereco: cliente.enderecoCli,
+        numero: cliente.numCli,
+        complemento: cliente.complementoCli,
+        bairro: cliente.bairroCli,
+        cidade: cliente.cidadeCli,
+        estado: cliente.estadoCli
+    })
+    await novoCliente.save()
 
+    // Confirmação de cliente adicionado ao banco (dialog)
+    dialog.showMessageBox({
+        type: 'info',
+        title: "Aviso",
+        message: "Cliente adicionado com sucesso",
+        buttons: ['OK']
+    }).then((result) => {
+        // se o botão OK for pressionado
+        if (result.response === 0) {
+            // enviar para o renderizador limpar os campos (preload.js)
+            event.reply('reset-form')
+        }
+    })
 })
 
 
