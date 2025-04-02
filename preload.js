@@ -19,5 +19,6 @@ contextBridge.exposeInMainWorld('api', {
     aboutExit: () => ipcRenderer.send('about-exit'),
     createCliente: (cliente) => ipcRenderer.send('create-cliente', cliente),
     resetForm: (args) => ipcRenderer.on('reset-form', args),
-    clientWindow: () => ipcRenderer.on('cliente-window')
+    clientWindow: () => ipcRenderer.on('cliente-window'),
+    cpfDuplicado: (cliente) => ipcRenderer.send('cpf-duplicated', cliente)
 })

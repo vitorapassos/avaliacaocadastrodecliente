@@ -15,6 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     btnDelete.disable = true
 })
 
+// CPF duplicado
+
+function cpfDuplicado(){
+    document.getElementById('inputCPF').value=""
+    document.getElementById('inputCPF').focus()
+}
+
 
 // Limpar
 function resetForm() {
