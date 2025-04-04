@@ -15,13 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btnDelete.disable = true
 })
 
-// CPF duplicado
-
-function cpfDuplicado(){
-    document.getElementById('inputCPF').value=""
-    document.getElementById('inputCPF').focus()
-}
-
 
 // Limpar
 function resetForm() {
@@ -176,6 +169,23 @@ function checarCPF() {
         cpfNotificacao.style.display = "none"; // Esconde o popup
     }
 }
+// ============================
+// ====== CPF duplicado =======
+
+function cpfDuplicado(){
+    console.log('Entrou no cpfduplicado')
+    frmCli.cpfCli.value=""
+    frmCli.cpfCli.focus()
+}
+
+api.cpfDuplicado((args) =>{
+    cpfDuplicado()
+})
+
+// ==== FIM CPF duplicado =====
+// ============================
+
+
 
 
 // ============================
@@ -193,3 +203,5 @@ api.resetForm((args) => {
 
 // ========== FIM =============
 // ==== RESETAR FORMULÁRIO ====
+
+

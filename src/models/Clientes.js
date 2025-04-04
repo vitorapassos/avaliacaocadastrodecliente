@@ -26,7 +26,7 @@ const clientesSchema = new Schema({
     telefone: {
         type: String
     },
-    celular: {
+    telefone2: {
         type: String
     },
     email: {

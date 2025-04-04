@@ -8,6 +8,7 @@
 console.log("Executando processo principal");
 
 // dialog: modulo electron para ativar a caixa de mensagens
+// shell: acessar links e aplicações externas
 const {
   app,
   BrowserWindow,
@@ -26,6 +27,12 @@ const { conectar, desconectar } = require("./database.js");
 
 // Model Cliente
 const clienteModel = require("./src/models/Clientes.js");
+
+// Importação da biblioteca nativa do JS para manipular arquivos
+const fs = require("fs");
+
+// Importação do pacote JSPDF (arquivos PDF) npm install jspdf
+const { jspdf, default: jsPDF } = require("jspdf");
 
 // Criando a janela principal
 let win;
@@ -157,6 +164,7 @@ const template = [
     submenu: [
       {
         label: "Clientes",
+        click: () => relatorioClientes(),
       },
     ],
   },
@@ -261,7 +269,7 @@ ipcMain.on("create-cliente", async (event, cliente) => {
           // Se o botão OK for pressionado
           if (result.response === 0) {
             // Limpar campo CPF, foco e borda em vermelho
-            event.reply("cpf-duplicated", cliente);
+            event.reply("cpf-duplicated");
           }
         });
     } else {
@@ -271,4 +279,97 @@ ipcMain.on("create-cliente", async (event, cliente) => {
 });
 
 // ============== FIM CRUD CREATE ================
+// ===============================================
+
+// ===============================================
+// =========== RELATÓRIO DE CLIENTES =============
+
+async function relatorioClientes() {
+  try {
+    // ===========================================
+    //        Confiuração do document PDF
+    // ===========================================
+    // p (portrait), l (landscape)
+    // mm = milimiters
+    // a4 = tamanho
+    // sempre projetar conforme um documento impresso
+    const doc = new jsPDF("p", "mm", "a4");
+
+    // inserir data atual no documento
+    const dataAtual = new Date().toLocaleDateString("pt-BR");
+
+    // diminuir texto doc.setFontSize() tamanho da fonte em ponto ( = word) pt
+    doc.setFontSize(10);
+    // a linha abaixo escreve um texto no documento
+    doc.text(`Data: ${dataAtual}`, 170, 15); // (x,y (mm))
+    doc.setFontSize(18);
+    doc.text("Relatório de clientes", 15, 30);
+    doc.setFontSize(12);
+    let y = 50; // variável de apoio
+
+    // Cabeçalho da tabela
+    doc.text("Nome", 14, y);
+    doc.text("Telefone", 85, y);
+    doc.text("E-mail", 130, y);
+    y += 5;
+
+    //desenhar uma linha
+    doc.setLineWidth(0.5);
+    doc.line(10, y, 200, y); // (10 (inicio)___________200 (fim))
+    y += 10;
+
+    // ===============================================
+    // Obter a listagem de clientes (ordem alfabética)
+    // ===============================================
+
+    const clientes = await clienteModel.find().sort({ nome: 1 });
+
+    //    console.log(clientes)
+    // popular o documento pdf com os clientes cadastrados
+    clientes.forEach((c) => {
+      // criar uma nova pagina se Y > 280mm (A4 = 297mm)
+      if (y > 280) {
+        doc.addPage();
+        y = 20; // margem
+
+        // Cabeçalho
+        doc.text("Nome", 14, y);
+        doc.text("Telefone", 85, y);
+        doc.text("E-mail", 130, y);
+        y += 5;
+      }
+      doc.text(c.nome, 14, y);
+      doc.text(c.telefone, 85, y);
+      doc.text(c.email, 130, y);
+      y += 10;
+    });
+
+    // ============================================
+    //        Numeração automática de páginas
+    // ============================================
+
+    const pages = doc.internal.getNumberOfPages();
+    for(let i = 1; i <= pages; i++){
+      doc.setPage(i)
+      doc.setFontSize(10)
+      doc.text(`Página ${i} de ${pages}`, 105,290, {align: 'center'})
+    }
+
+    // ============================================
+    // Abrir o arquivo pdf no sistema operacional
+    // ============================================
+
+    // Definir o caminho do arquivo temporário e nome do arquivo com extensão .pdf (!!! Importante !!!)
+    const tempDir = app.getPath("temp");
+    const filePath = path.join(tempDir, "clientes.pdf");
+    // salvar temporariamente o arquivo
+    doc.save(filePath);
+    // abrir o arquivo no aplicativo padrão de leitura de pdf do computador do usuário
+    shell.openPath(filePath);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ========= FIM RELATÓRIO DE CLIENTES ===========
 // ===============================================
