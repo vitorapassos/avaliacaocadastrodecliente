@@ -3,38 +3,6 @@
  * @author Vitor de Assis
  */
 
-// Capturar foco para primeira caixa de texto
-const foco = document.getElementById('inputBuscar')
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    foco.focus()
-
-    // Desativar botões
-    btnUpdate.disable = true
-    btnDelete.disable = true
-})
-
-
-// Limpar
-function resetForm() {
-    document.getElementById('inputNome').value = ""
-    document.getElementById('InputRG').value = ""
-    document.getElementById('inputCPF').value = ""
-    document.getElementById('inputSexo').value = ""
-    document.getElementById('inputDataNasc').value = ""
-    document.getElementById('inputTelefone').value = ""
-    document.getElementById('inputTelefone2').value = ""
-    document.getElementById('inputEmail').value = ""
-    document.getElementById('inputSenha').value = ""
-    document.getElementById('inputCep').value = ""
-    document.getElementById('InputEndereco').value = ""
-    document.getElementById('inputNum').value = ""
-    document.getElementById('inputComplemento').value = ""
-    document.getElementById('inputBairro').value = ""
-    document.getElementById('inputCidade').value = ""
-    document.getElementById('inputEstado').value = ""
-}
 
 let frmCli = document.getElementById('frmCli')
 let inputNome = document.getElementById('inputNome')
@@ -54,8 +22,21 @@ let inputBairro = document.getElementById('inputBairro')
 let inputCidade = document.getElementById('inputCidade')
 let inputEstado = document.getElementById('inputEstado')
 
-// ======
-// ==CC==
+
+// Capturar foco para primeira caixa de texto
+const foco = document.getElementById('inputBuscar')
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    foco.focus()
+
+    // Desativar botões
+    btnUpdate.disable = true
+    btnDelete.disable = true
+})
+
+// ======================
+// == Cadastro Cliente ==
 
 frmCli.addEventListener('submit', async (event) => {
     event.preventDefault()
@@ -105,8 +86,8 @@ frmCli.addEventListener('submit', async (event) => {
     }
 })
 
-// == FIM CC ==
-// ============
+// == FIM Cadastro Cliente ==
+// ==========================
 
 // Buscas CEP
 function buscarEndereco() {
@@ -162,30 +143,35 @@ function checarCPF() {
     let cpfNotificacao = document.getElementById('cpfNotificacao');
 
     if (!validaCPF(inputCPF.value)) {
-        cpfNotificacao.style.display = "block"; // Mostra o popup
-        inputCPF.focus(); // Retorna o foco para o campo CPF
+        /*cpfNotificacao.style.display = "block"; // Mostra o popup
+        inputCPF.focus(); // Retorna o foco para o campo CPF*/
+        inputCPF.classList.remove('is-valid')
+        inputCPF.classList.add('is-invalid')
 
     } else {
         cpfNotificacao.style.display = "none"; // Esconde o popup
+        inputCPF.classList.remove('is-invalid')
+        inputCPF.classList.add('is-valid')
+
     }
 }
+
+
 // ============================
 // ====== CPF duplicado =======
 
-function cpfDuplicado(){
-    console.log('Entrou no cpfduplicado')
-    frmCli.cpfCli.value=""
-    frmCli.cpfCli.focus()
+function cpfDuplicate(cliente) {
+    inputCPF.value = "";
+    inputCPF.focus();
+    inputCPF.classList.add('is-invalid')
 }
 
-api.cpfDuplicado((args) =>{
-    cpfDuplicado()
+api.cpfDuplicate((args) => {
+    cpfDuplicate()
 })
 
 // ==== FIM CPF duplicado =====
 // ============================
-
-
 
 
 // ============================

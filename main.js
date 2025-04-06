@@ -269,7 +269,7 @@ ipcMain.on("create-cliente", async (event, cliente) => {
           // Se o botão OK for pressionado
           if (result.response === 0) {
             // Limpar campo CPF, foco e borda em vermelho
-            event.reply("cpf-duplicated");
+            event.reply("cpf-duplicate")
           }
         });
     } else {
