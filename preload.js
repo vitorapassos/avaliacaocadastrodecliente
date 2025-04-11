@@ -20,5 +20,8 @@ contextBridge.exposeInMainWorld('api', {
     createCliente: (cliente) => ipcRenderer.send('create-cliente', cliente),
     clientWindow: () => ipcRenderer.on('cliente-window'),
     resetForm: (args) => ipcRenderer.on('reset-form', args),
-    cpfDuplicate: (args) => ipcRenderer.on('cpf-duplicate', args)
+    cpfDuplicate: (args) => ipcRenderer.on('cpf-duplicate', args),
+    searchName: (cliName) => ipcRenderer.send('search-name', cliName),
+    renderClient: (client) => ipcRenderer.on('render-client', client)
+
 })
