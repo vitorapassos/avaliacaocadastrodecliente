@@ -269,7 +269,7 @@ ipcMain.on("create-cliente", async (event, cliente) => {
           // Se o botão OK for pressionado
           if (result.response === 0) {
             // Limpar campo CPF, foco e borda em vermelho
-            event.reply("cpf-duplicate")
+            event.reply("cpf-duplicate");
           }
         });
     } else {
@@ -349,10 +349,10 @@ async function relatorioClientes() {
     // ============================================
 
     const pages = doc.internal.getNumberOfPages();
-    for(let i = 1; i <= pages; i++){
-      doc.setPage(i)
-      doc.setFontSize(10)
-      doc.text(`Página ${i} de ${pages}`, 105,290, {align: 'center'})
+    for (let i = 1; i <= pages; i++) {
+      doc.setPage(i);
+      doc.setFontSize(10);
+      doc.text(`Página ${i} de ${pages}`, 105, 290, { align: "center" });
     }
 
     // ============================================
@@ -374,30 +374,37 @@ async function relatorioClientes() {
 // ========= FIM RELATÓRIO DE CLIENTES ===========
 // ===============================================
 
-
-
 // ===============================================
 // ================= CRUD READ ===================
 
-ipcMain.on('search-name', async (event, cliName) =>{
+// validação da busca
+ipcMain.on("validate-search", () => {
+  dialog.showMessageBox({
+    type: "warning",
+    title: "Atenção",
+    message: "Preencha o campo de busca",
+    buttons: ["OK"],
+  });
+});
+
+ipcMain.on("search-name", async (event, cliName) => {
   // Teste recebimento nome do cliente (passo 2)
-  console.log(cliName)
+  console.log(cliName);
   try {
     // Passos 3 e 4 (Busca dos dados do cliente pelo nome)
     const client = await clienteModel.find({
       // RegExp (Expressão Regular 'i' -> insensitive(ignorar letras maiúsculas e minúsculas))
-      nome: new RegExp(cliName, 'i')
-    })
+      nome: new RegExp(cliName, "i"),
+    });
     // Teste da busca do cliente pelo nome (Passos 3 e 4)
-    console.log(client)
+    console.log(client);
     // Passo 5: Enviar ao renderizador (rendererCadCli) os dados do cliente
     // Não esquecer de converter para string
-    event.reply('render-client', JSON.stringify(client))
+    event.reply("render-client", JSON.stringify(client));
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
-
+});
 
 // ==================== FIM ======================
 // ================= CRUD READ ===================

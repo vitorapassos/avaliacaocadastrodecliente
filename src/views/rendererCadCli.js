@@ -190,39 +190,44 @@ api.resetForm((args) => {
 function searchName() {
   // console.log("Teste botão buscar")
   // Passo 1:  Capturar o nome a ser pesquisado
-  let cliName = document.getElementById("inputBuscar").value;
-  // Teste do passo 1
-  // console.log(cliName)
-  // Passo 2: Enviar o nome do cliente ao main
-  api.searchName(cliName);
-  // Passo 5: Receber os dados do cliente
-  api.renderClient((event, client) => {
-    // Teste de recebimento dos dados do cliente
-    console.log(client);
-    // Passo 6: Renderização  dos dados do cliente - não esquecer de converter os dados de STRING para JSON
-    const clientData = JSON.parse(client);
-    arrayClient = clientData;
+  let cliName = document.getElementById("inputBuscar").value; // Teste do passo 1
+  console.log(cliName);
+  // Validação de campo obrigatório
+  if (cliName === "") {
+    // Enviar ao main um pedido para alertar o usuário
+    api.validateSearch()
+  } else {
+    // Passo 2: Enviar o nome do cliente ao main
+    api.searchName(cliName);
+    // Passo 5: Receber os dados do cliente
+    api.renderClient((event, client) => {
+      // Teste de recebimento dos dados do cliente
+      console.log(client);
+      // Passo 6: Renderização  dos dados do cliente - não esquecer de converter os dados de STRING para JSON
+      const clientData = JSON.parse(client);
+      arrayClient = clientData;
 
-    // Uso do ForEach para percorrer o vetor e extrair os dados
-    arrayClient.forEach((c) => {
-      inputNome.value = c.nome;
-      inputRG.value = c.rg;
-      inputCPF.value = c.cpf;
-      inputSexo.value = c.sexo;
-      inputDataNasc.value = c.dataNascimento;
-      inputTelefone.value = c.telefone;
-      inputTelefone2.value = c.telefone2;
-      inputEmail.value = c.email;
-      inputSenha.value = c.senha;
-      inputCep.value = c.cep;
-      inputEndereco.value = c.endereco;
-      inputNum.value = c.numero;
-      inputComplemento.value = c.complemento;
-      inputBairro.value = c.bairro;
-      inputCidade.value = c.cidade;
-      inputEstado.value = c.estado;
+      // Uso do ForEach para percorrer o vetor e extrair os dados
+      arrayClient.forEach((c) => {
+        inputNome.value = c.nome;
+        inputRG.value = c.rg;
+        inputCPF.value = c.cpf;
+        inputSexo.value = c.sexo;
+        inputDataNasc.value = c.dataNascimento;
+        inputTelefone.value = c.telefone;
+        inputTelefone2.value = c.telefone2;
+        inputEmail.value = c.email;
+        inputSenha.value = c.senha;
+        inputCep.value = c.cep;
+        inputEndereco.value = c.endereco;
+        inputNum.value = c.numero;
+        inputComplemento.value = c.complemento;
+        inputBairro.value = c.bairro;
+        inputCidade.value = c.cidade;
+        inputEstado.value = c.estado;
+      });
     });
-  });
+  }
 }
 
 // ========== FIM =============
