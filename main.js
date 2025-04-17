@@ -398,9 +398,27 @@ ipcMain.on("search-name", async (event, cliName) => {
     });
     // Teste da busca do cliente pelo nome (Passos 3 e 4)
     console.log(client);
-    // Passo 5: Enviar ao renderizador (rendererCadCli) os dados do cliente
-    // Não esquecer de converter para string
-    event.reply("render-client", JSON.stringify(client));
+
+    // Melhoria da experiencia do usuário (se não existir um cliente cadastrado enviar uma mensagem ao usuário questionando se ele deseja cadastrar este novo cliente)
+    // Se o vetor estiver vazio
+    if (client.length === 0) {
+      // Questionar o usuário
+      dialog
+        .showMessageBox({
+          type: "warning",
+          title: "Aviso",
+          message: "Cliente não cadastrado.\nDeseja cadastrar este cliente?",
+          defaultId: 0,
+          buttons: ["SIM", "NÃO"], // [0, 1] defaultId: 0 = Sim
+        })
+        .then((result) => {
+          //
+        });
+    } else {
+      // Passo 5: Enviar ao renderizador (rendererCadCli) os dados do cliente
+      // Não esquecer de converter para string
+      event.reply("render-client", JSON.stringify(client));
+    }
   } catch (error) {
     console.log(error);
   }
