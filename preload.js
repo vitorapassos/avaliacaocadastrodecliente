@@ -23,6 +23,7 @@ contextBridge.exposeInMainWorld('api', {
     cpfDuplicate: (args) => ipcRenderer.on('cpf-duplicate', args),
     searchName: (cliName) => ipcRenderer.send('search-name', cliName),
     renderClient: (client) => ipcRenderer.on('render-client', client),
-    validateSearch: () => ipcRenderer.send('validate-search')
+    validateSearch: () => ipcRenderer.send('validate-search'),
+    setName: (args) => ipcRenderer.on('set-name', args)
 
 })

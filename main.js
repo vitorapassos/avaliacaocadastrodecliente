@@ -412,7 +412,13 @@ ipcMain.on("search-name", async (event, cliName) => {
           buttons: ["SIM", "NÃO"], // [0, 1] defaultId: 0 = Sim
         })
         .then((result) => {
-          //
+          if (result.response === 0) {
+            // Enviar ao rendererCadCli um pedido para copiar o nome do cliente do campo de busca para o campo nome (evitar que o usuário digite o nome novamente)
+            event.reply('set-name')
+          } else {
+            // enviar ao rendererCliente um pedido para limpar os campos (reutilizar a api do preload 'reset-form')
+            event.reply("reset-form");
+          }
         });
     } else {
       // Passo 5: Enviar ao renderizador (rendererCadCli) os dados do cliente

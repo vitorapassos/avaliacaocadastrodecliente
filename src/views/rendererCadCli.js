@@ -187,6 +187,21 @@ api.resetForm((args) => {
 // ============================
 // ======== CRUD READ =========
 
+// setar o nome do cliente o nome do cliente para fazer um novo cadastro se a busca retornar que o cliente
+api.setName((args) => {
+  console.log("teste do IPC 'set-name'");
+  let busca = document.getElementById("inputBuscar").value;
+
+  // foco no campo nome
+  inputNome.focus();
+  // Limpar o campo de busca
+  foco.value = "";
+  //Copiar o nome do cliente para o campo nome
+  inputNome.value = busca;
+  //
+  busca.value = "";
+});
+
 function searchName() {
   // console.log("Teste botão buscar")
   // Passo 1:  Capturar o nome a ser pesquisado
@@ -195,7 +210,7 @@ function searchName() {
   // Validação de campo obrigatório
   if (cliName === "") {
     // Enviar ao main um pedido para alertar o usuário
-    api.validateSearch()
+    api.validateSearch();
   } else {
     // Passo 2: Enviar o nome do cliente ao main
     api.searchName(cliName);
