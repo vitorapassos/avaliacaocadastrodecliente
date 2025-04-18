@@ -146,7 +146,6 @@ function checarCPF() {
     inputCPF.classList.remove("is-valid");
     inputCPF.classList.add("is-invalid");
   } else {
-    cpfNotificacao.style.display = "none"; // Esconde o popup
     inputCPF.classList.remove("is-invalid");
     inputCPF.classList.add("is-valid");
   }
@@ -196,7 +195,7 @@ api.setName((args) => {
   inputNome.focus();
   // Limpar o campo de busca
   foco.value = "";
-  //Copiar o nome do cliente para o campo nome
+  // Copiar o nome do cliente para o campo nome
   inputNome.value = busca;
   //
   busca.value = "";

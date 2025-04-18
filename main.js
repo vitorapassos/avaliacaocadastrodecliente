@@ -417,7 +417,7 @@ ipcMain.on("search-name", async (event, cliName) => {
             event.reply('set-name')
           } else {
             // enviar ao rendererCliente um pedido para limpar os campos (reutilizar a api do preload 'reset-form')
-            event.reply("reset-form");
+            event.reply('reset-form');
           }
         });
     } else {

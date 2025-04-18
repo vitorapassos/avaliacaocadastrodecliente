@@ -38,17 +38,19 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="inputRG" class="text-white">RG</label>
                         <input type="text" class="form-control" id="inputRG">
                     </div>
-                    <div class="col-md-4">
-                        <label for="inputCPF" class="text-white d-flex">CPF * <a class="notificaCPF"
-                                id="cpfNotificacao">CPF
-                                inválido, tente novamente</a></label>
-                        <div class="notificaCPF" id="cpfNotificacao"></div>
+                    <div class="col-md-3">
+                        <label for="inputCPF" class="text-white d-flex">CPF *</label>
                         <input type="text" class="form-control" id="inputCPF" onblur="checarCPF()" required>
                     </div>
+                    <div class="col-md-2">
+                        <label class="text-white d-flex">BUSCARCPF</label>
+                        <button type="button" class="btn btn-outline-success btnBuscar">🔍︎</button>
+                    </div><!-- HAHAHA -->
+
                     <div class="col-md-2">
                         <label for="inputSexo" class="text-white">Sexo *</label>
                         <select class="form-control" id="inputSexo" required>

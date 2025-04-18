@@ -2,68 +2,71 @@
  *
  */
 
-.corbg{
-   background-color: rgb(97, 97, 97);
- }
+.corbg {
+  background-color: rgb(97, 97, 97);
+}
 
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   border: 0;
-   outline: 0;
-   text-decoration: none;
-   list-style: none;
-   font-family: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  outline: 0;
+  text-decoration: none;
+  list-style: none;
+  font-family: inherit;
 }
 
 .notificaCPF {
-   display: none;
-   position: absolute;
-   left: 350px;
-   font-size: 12px;
-   background-color: #ffdddd;
-   color: red;
-   padding: 5px;
-   border-radius: 5px;
-   top: 150px;
-   width: max-content;
-   white-space: nowrap;
-   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  display: none;
+  position: absolute;
+  left: 350px;
+  font-size: 12px;
+  background-color: #ffdddd;
+  color: red;
+  padding: 5px;
+  border-radius: 5px;
+  top: 150px;
+  width: max-content;
+  white-space: nowrap;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 button {
-   margin-top: 15px;
-   display: flex;
-   border: 1px solid #fff;
+  margin-top: 15px;
+  display: flex;
+  border: 1px solid #fff;
 }
 
 label {
-   margin-top: 15px;
+  margin-top: 15px;
 }
 
 h1 {
-   margin-left: auto;
-   margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.separacaoBlocos{
-   border: 1px solid #FFF;
+.separacaoBlocos {
+  border: 1px solid #fff;
 }
 
-.blocoPesquisar{
-   padding-top: 30px;
+.blocoPesquisar {
+  padding-top: 30px;
 }
-
 
 /* Botão reset */
 
-#btnReset{
-   width: 48px;
-   height: 48px;
-   background-image: url('../img/eraser48.png');
-   border: none;
-   cursor: pointer;
-   margin-left: 10px;
+#btnReset {
+  width: 48px;
+  height: 48px;
+  background-image: url("../img/eraser48.png");
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
+.btnBuscar {
+   width: 80px;
+   height: 40px;
+}
