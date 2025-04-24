@@ -20,7 +20,30 @@ let inputComplemento = document.getElementById("inputComplemento");
 let inputBairro = document.getElementById("inputBairro");
 let inputCidade = document.getElementById("inputCidade");
 let inputEstado = document.getElementById("inputEstado");
-let searchCient = document.getElementById("inputBuscar");
+let searchClient = document.getElementById("inputBuscar");
+
+// ====================================================
+// ============== MANIPULAÇÃO DO ENTER ================
+
+function teclaEnter(event){
+  if(event.key === "Enter"){
+    event.preventDefault() // Ignorar o comportamento padrão
+    //executar o metodo de busca do cliente
+    searchName()
+  }
+}
+
+// "Escuta" do teclado ('keydown' = pressionar tecla)
+frmCli.addEventListener('keydown', teclaEnter)
+
+// função para restaurar o padrão (tecla Enter)
+function restaurarEnter(){
+  frmCli.removeEventListener('keydown', teclaEnter)
+}
+
+
+// ============ FIM MANIPULAÇÃO DO ENTER ==============
+// ====================================================
 
 // Capturar foco para primeira caixa de texto
 const foco = document.getElementById("inputBuscar");
