@@ -30,6 +30,7 @@ function teclaEnter(event){
     event.preventDefault() // Ignorar o comportamento padrão
     //executar o metodo de busca do cliente
     searchName()
+    console.log("HAHAHAHAHHA")
   }
 }
 
@@ -220,8 +221,11 @@ api.setName((args) => {
   foco.value = "";
   // Copiar o nome do cliente para o campo nome
   inputNome.value = busca;
-  //
-  busca.value = "";
+  //limpa o ampo de busca (foco foi capturado de forma global)
+  //busca.value = "";
+
+  // Restaurar tecla Enter
+  restaurarEnter()
 });
 
 function searchName() {
@@ -250,7 +254,7 @@ function searchName() {
         inputRG.value = c.rg;
         inputCPF.value = c.cpf;
         inputSexo.value = c.sexo;
-        inputDataNasc.value = c.dataNascimento;
+        inputDataNasc.value = new Date(c.dataNascimento);
         inputTelefone.value = c.telefone;
         inputTelefone2.value = c.telefone2;
         inputEmail.value = c.email;
@@ -262,6 +266,8 @@ function searchName() {
         inputBairro.value = c.bairro;
         inputCidade.value = c.cidade;
         inputEstado.value = c.estado;
+        // restaurar tecla Enter
+        restaurarEnter()
       });
     });
   }
