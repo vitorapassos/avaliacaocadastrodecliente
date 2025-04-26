@@ -2,7 +2,7 @@
  * Cadastro de usuários
  * @author Vitor de Assis
  */
-
+let frmSearchClient = document.getElementById("frmSearchClient");
 let frmCli = document.getElementById("frmCli");
 let inputNome = document.getElementById("inputNome");
 let inputRG = document.getElementById("inputRG");
@@ -25,23 +25,21 @@ let searchClient = document.getElementById("inputBuscar");
 // ====================================================
 // ============== MANIPULAÇÃO DO ENTER ================
 
-function teclaEnter(event){
-  if(event.key === "Enter"){
-    event.preventDefault() // Ignorar o comportamento padrão
-    //executar o metodo de busca do cliente
-    searchName()
-    console.log("HAHAHAHAHHA")
+function teclaEnter(event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // ignorar o comportamento padrão
+    // executar o método de busca do cliente
+    searchName();
   }
 }
 
 // "Escuta" do teclado ('keydown' = pressionar tecla)
-frmCli.addEventListener('keydown', teclaEnter)
+frmSearchClient.addEventListener("keydown", teclaEnter);
 
 // função para restaurar o padrão (tecla Enter)
-function restaurarEnter(){
-  frmCli.removeEventListener('keydown', teclaEnter)
+function restaurarEnter() {
+  frmSearchClient.removeEventListener("keydown", teclaEnter);
 }
-
 
 // ============ FIM MANIPULAÇÃO DO ENTER ==============
 // ====================================================
@@ -53,11 +51,13 @@ const foco = document.getElementById("inputBuscar");
 let arrayClient = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  foco.focus();
+  // Desativar botões editar e excluir
+  btnUpdate.disabled = true;
+  btnDelete.disabled = true;
+  // Ativar botão adicionar
+  btnCreate.disabled = false;
 
-  // Desativar botões
-  btnUpdate.disable = true;
-  btnDelete.disable = true;
+  foco.focus();
 });
 
 // ======================
@@ -225,7 +225,7 @@ api.setName((args) => {
   //busca.value = "";
 
   // Restaurar tecla Enter
-  restaurarEnter()
+  restaurarEnter();
 });
 
 function searchName() {
@@ -267,7 +267,14 @@ function searchName() {
         inputCidade.value = c.cidade;
         inputEstado.value = c.estado;
         // restaurar tecla Enter
-        restaurarEnter()
+        restaurarEnter();
+        // desativar o botão adicionar
+        // Desativar botões editar e excluir
+        btnCreate.disabled = true;
+        // Ativaros botões editar e excluir
+        btnUpdate.disabled = false;
+        btnDelete.disabled = false
+        
       });
     });
   }
