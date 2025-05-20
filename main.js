@@ -414,10 +414,10 @@ ipcMain.on("search-name", async (event, cliName) => {
         .then((result) => {
           if (result.response === 0) {
             // Enviar ao rendererCadCli um pedido para copiar o nome do cliente do campo de busca para o campo nome (evitar que o usuário digite o nome novamente)
-            event.reply('set-name')
+            event.reply("set-name");
           } else {
             // enviar ao rendererCliente um pedido para limpar os campos (reutilizar a api do preload 'reset-form')
-            event.reply('reset-form');
+            event.reply("reset-form");
           }
         });
     } else {
@@ -432,3 +432,100 @@ ipcMain.on("search-name", async (event, cliName) => {
 
 // ==================== FIM ======================
 // ================= CRUD READ ===================
+
+// ==============================
+// ======== CRUD DELETE =========
+
+ipcMain.on("delete-client", async (event, id) => {
+  //console.log(id);
+  // Excuir o registro do banco (passo 3) IMPORTANTE! (confirmar antes da exclusão)
+  // win = Janela Principal
+  const result = await dialog.showMessageBox(win, {
+    type: "warning",
+    title: "Atenção!",
+    message:
+      "Tem certeza que deseja excluir este Cliente?\nEsta ação não podera ser desfeita.",
+    buttons: ["Cancelar", "Excluir"], // É um Vetor indices: [0, 1]
+  });
+  console.log(result);
+  if (result.response === 1) {
+    try {
+      const delClient = await clienteModel.findByIdAndDelete(id);
+      console.log(`deletado ${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+});
+
+// ============ FIM =============
+// ======== CRUD DELETE =========
+
+// ==============================
+// ======== CRUD DELETE =========
+
+ipcMain.on("update-client", async (event, client) => {
+  try {
+    const updateCliente = await clienteModel.findByIdAndUpdate(
+      client.idCli,
+      {
+        nome: client.nomeCli,
+        rg: client.rgCli,
+        cpf: client.cpfCli,
+        sexo: client.sexoCli,
+        dataNascimento: client.dataNascCli,
+        telefone: client.telefoneCli,
+        telefone2: client.telefone2Cli,
+        email: client.emailCli,
+        senha: client.senhaCli,
+        cep: client.cepCli,
+        endereco: client.enderecoCli,
+        numero: client.numCli,
+        complemento: client.complementoCli,
+        bairro: client.bairroCli,
+        cidade: client.cidadeCli,
+        estado: client.estadoCli,
+      },
+      {
+        new: true,
+      }
+    );
+    // Confirmação de cliente adicionado ao banco (dialog)
+    dialog
+      .showMessageBox({
+        type: "info",
+        title: "Aviso",
+        message: "Dados do cliente alterados com sucesso",
+        buttons: ["OK"],
+      })
+      .then((result) => {
+        // se o botão OK for pressionado
+        if (result.response === 0) {
+          // enviar para o renderizador limpar os campos (preload.js)
+          event.reply("reset-form");
+        }
+      });
+  } catch (error) {
+    if (error.code === 11000) {
+      dialog
+        .showMessageBox({
+          type: "error",
+          title: "Atenção!",
+          message: "CPF já cadastrado.\nVerifique o número digitado.",
+          buttons: ["OK"],
+        })
+        .then((result) => {
+          // Se o botão OK for pressionado
+          if (result.response === 0) {
+            // Limpar campo CPF, foco e borda em vermelho
+            event.reply("cpf-duplicate");
+          }
+        });
+    } else {
+      console.log(error);
+    }
+  }
+});
+
+// ============ FIM =============
+// ======== CRUD DELETE =========

@@ -21,7 +21,7 @@
         <section class="blocoPesquisar">
             <form class="d-flex" role="search" id="frmSearchClient">
                 <input class="form-control me-5" id="inputBuscar" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" onclick="searchName()">Buscar</button>
+                <button class="btn btn-outline-success" onclick="searchName()" type="button">Buscar</button>
             </form>
         </section>
 
@@ -30,6 +30,10 @@
             <h1 id="titulo" class="text-white pt-3">Cadastro de Clientes</h1>
 
             <form id="frmCli">
+
+                <!-- ID do cliente (oculto) -->
+                 <input type="text" name="" id="inputIdClient">
+
                 <div class="row">
                     <div class="col-md-12">
                         <label for="inputNome" class="text-white">Nome *</label>
@@ -154,7 +158,7 @@
 
                 <button type="submit" class="btn btn-primary" id="btnCreate">Cadastrar</button>
                 <button type="submit" class="btn btn-warning" id="btnUpdate">Editar</button>
-                <button type="button" class="btn btn-danger" id="btnDelete">Excluir</button>
+                <button type="button" class="btn btn-danger" id="btnDelete" onclick="removeClient()">Excluir</button>
                 <button type="reset" class="btn" id="btnReset" onclick="resetForm()"></button>
             </form>
         </section>

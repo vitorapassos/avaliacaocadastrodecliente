@@ -31,3 +31,8 @@ button{
     border: 1px solid #FFF;
 }
 
+/* Ocultar o id do cliente*/
+
+#inputIdClient{
+    display:none;
+}

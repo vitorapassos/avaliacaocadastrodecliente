@@ -4,6 +4,7 @@
  */
 let frmSearchClient = document.getElementById("frmSearchClient");
 let frmCli = document.getElementById("frmCli");
+let inputIdClient = document.getElementById("inputIdClient");
 let inputNome = document.getElementById("inputNome");
 let inputRG = document.getElementById("inputRG");
 let inputCPF = document.getElementById("inputCPF");
@@ -21,6 +22,14 @@ let inputBairro = document.getElementById("inputBairro");
 let inputCidade = document.getElementById("inputCidade");
 let inputEstado = document.getElementById("inputEstado");
 let searchClient = document.getElementById("inputBuscar");
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 
 // ====================================================
 // ============== MANIPULAÇÃO DO ENTER ================
@@ -66,26 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
 frmCli.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  console.log(
-    inputNome.value,
-    inputRG.value,
-    inputCPF.value,
-    inputSexo.value,
-    inputDataNasc.value,
-    inputTelefone.value,
-    inputTelefone2.value,
-    inputEmail.value,
-    inputSenha.value,
-    inputCep.value,
-    inputEndereco.value,
-    inputNum.value,
-    inputComplemento.value,
-    inputBairro.value,
-    inputCidade.value,
-    inputEstado.value
-  );
+  // Estratégia para usar o submit para cadastrar um novo cliente ou editar os dados de um cliente já existente
+  // verificar se existe o id do cliente
 
-  try {
+  if (inputIdClient.value === "") {
+    // Cadastrar um novo cliente
     const cliente = {
       nomeCli: inputNome.value,
       rgCli: inputRG.value,
@@ -104,10 +98,33 @@ frmCli.addEventListener("submit", async (event) => {
       cidadeCli: inputCidade.value,
       estadoCli: inputEstado.value,
     };
-
     api.createCliente(cliente);
-  } catch (error) {
-    console.log(error);
+  } else {
+    // Alterar os dados de um cliente existente
+    // Teste de validação do ID
+    //console.log(inputIdClient.value);
+    // Cadastrar um novo cliente
+    const cliente = {
+      idCli: inputIdClient.value,
+      nomeCli: inputNome.value,
+      rgCli: inputRG.value,
+      cpfCli: inputCPF.value,
+      sexoCli: inputSexo.value,
+      dataNascCli: inputDataNasc.value,
+      telefoneCli: inputTelefone.value,
+      telefone2Cli: inputTelefone2.value,
+      emailCli: inputEmail.value,
+      senhaCli: inputSenha.value,
+      cepCli: inputCep.value,
+      enderecoCli: inputEndereco.value,
+      numCli: inputNum.value,
+      complementoCli: inputComplemento.value,
+      bairroCli: inputBairro.value,
+      cidadeCli: inputCidade.value,
+      estadoCli: inputEstado.value,
+    };
+    api.updateClient(cliente);
+
   }
 });
 
@@ -250,11 +267,12 @@ function searchName() {
 
       // Uso do ForEach para percorrer o vetor e extrair os dados
       arrayClient.forEach((c) => {
+        inputIdClient.value = c._id;
         inputNome.value = c.nome;
         inputRG.value = c.rg;
         inputCPF.value = c.cpf;
         inputSexo.value = c.sexo;
-        inputDataNasc.value = new Date(c.dataNascimento);
+        inputDataNasc.value = formatDate(c.dataNascimento);
         inputTelefone.value = c.telefone;
         inputTelefone2.value = c.telefone2;
         inputEmail.value = c.email;
@@ -273,8 +291,7 @@ function searchName() {
         btnCreate.disabled = true;
         // Ativaros botões editar e excluir
         btnUpdate.disabled = false;
-        btnDelete.disabled = false
-        
+        btnDelete.disabled = false;
       });
     });
   }
@@ -282,3 +299,15 @@ function searchName() {
 
 // ========== FIM =============
 // ======== CRUD READ =========
+
+// ==============================
+// ======== CRUD DELETE =========
+// Meu Deus como eu odeio esse git
+function removeClient() {
+  //console.log(inputIdClient.value) // teste do passo 1
+  // Passo 2: Envio do id para o main
+  api.deleteClient(inputIdClient.value);
+}
+
+// ============ FIM =============
+// ======== CRUD DELETE =========
